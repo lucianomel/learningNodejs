@@ -42,9 +42,9 @@ console.log(hobbies);
 // Spread and rest operators
 // Inmutability, we copy all the array and add a new element
 const copied1=hobbies.slice();
-const copied2=[...hobbies];
+const copied2=[...hobbies]; //Spread
 
-const toArray=(...args)=>{
+const toArray=(...args)=>{//Rest
     return args;
 }
 console.log(toArray(1,2,3,4,5));
@@ -58,3 +58,8 @@ const [hobby1, hobby2]=hobbies;
 console.log(hobby1,hobby2);
 const {name, age}=person;
 console.log(name,age);
+
+const printName2 = (person)=>{
+    console.log(person.name);
+}
+printName2(person);
