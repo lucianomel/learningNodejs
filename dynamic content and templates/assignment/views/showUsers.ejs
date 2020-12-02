@@ -1,0 +1,16 @@
+<%- include('includes/head.ejs') %> 
+</head>
+<body>
+    <% if(users.length>0){%>
+        <ul>
+            <% users.forEach(user=>{ %>
+                <li><%=user%></li>
+            <%}) %> 
+        </ul>
+    <%}else{%>
+        <h3>No users entered yet</h3>
+    <%} %> 
+    <form action="/users/add-name">
+        <button type="submit">Add name</button>
+    </form>
+<%- include('includes/end.ejs') %> 
