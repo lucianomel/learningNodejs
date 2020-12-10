@@ -1,0 +1,34 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="css/cart.css">
+</head> 
+<body>
+<table class="centered">
+    <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>subtotal</th>
+    </tr>
+    <% for (let product of prods) { %>
+        <!-- <% if(product.qty>0){%> -->
+    <tr> 
+        <td ><%= product.title %></td>
+        <td><%= product.description.length>30 ? product.description.slice(0,50)+'...' :product.description %></td>
+        <td id="product__price"><%= product.price %></td>
+        <td id="<%= product.id %>__table__qty" class="table__qty"><%= product.qty %></td>
+        <td class="subtotal"><%= product.qty * product.price %></td>
+    </tr> 
+        <!-- <%} %>  -->
+    <% } %>
+    <tr>
+        <th>Total</th>
+        <th>------</th>
+        <th>------</th>
+        <th>------</th>
+        <th class="totalPrice"><%=totalPrice%></th>
+    </tr>
+    
+</table>
+<%- include('../includes/end.ejs') %>
