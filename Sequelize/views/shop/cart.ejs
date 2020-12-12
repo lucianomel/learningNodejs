@@ -1,0 +1,83 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="css/cart.css">
+    </head> 
+    <body>
+<%- include('../includes/navigation.ejs') %>
+    <main>
+    <% if (prods.length > 0) { %>
+        <div class="grid">
+            <% for (let product of prods) { %>
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title"> 
+                        <%= product.title %>
+                    </h1>
+                </header>
+                <div class="card__image">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price">$
+                        <%= product.price %>
+                    </h2>
+                    <p class="product__description">
+                        <%= product.description %>
+                    </p>
+                    <p class="prodIdNoDisplay"><%= product.id %></p>
+                </div>
+                <div class="card__actions">
+                    <!-- /products/83290jn231d (some id) -->
+                    <a href="/products/<%= product.id %> " class="btn">Details</a>
+                    <a href="/cart/delete-cart/<%= product.id %>" class="btn">Delete from cart</a>
+                    <form action="/cart/update-qty" method='POST'>
+                        <label for="qty">Qty</label>
+                        <input type="number" id="qty" value="<%= product.cartItem.quantity %>" name="qty" min="0">
+                    </form>
+                </div>
+            </article>
+            <% } %>
+        </div>
+        <div class="cart__summary">
+            <div>
+                <h3 >Total price: <span class="totalPrice"><%= Math.round(totalPrice*100)/100 %></span></h1>
+                <form class="checkout__form" action="/checkout" method="POST">
+                    <input type="hidden" class="checkout__qty" name="cart" >
+                    <input type="hidden" class="checkout__totalPrice" name="totalPrice" >
+                    <button type="submit" class="btn">Checkout</button>
+                </form>
+                <form action="/create-order" method="POST">
+                    <button class="btn" type="submit">Order now!</button>
+                </form>
+            </div>
+            <table class="centered">
+                <tr>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>subtotal</th>
+                </tr>
+                <% for (let product of prods) { %>
+                <tr> 
+                    <td ><%= product.title %></td>
+                    <td><%= product.description.length>30 ? product.description.slice(0,50)+'...' :product.description %></td>
+                    <td id="product__price"><%= product.price %></td>
+                    <td id="<%= product.id %>__table__qty" class="table__qty"><%= product.qty %></td>
+                    <td class="subtotal"><%= Math.round( product.qty * product.price *100)/100 %></td>
+                </tr> 
+                <% } %>
+                <tr>
+                    <th>Total</th>
+                    <th>------</th>
+                    <th>------</th>
+                    <th>------</th>
+                    <th class="totalPrice"><%= Math.round(totalPrice*100)/100%></th>
+                </tr>
+            </table>
+        </div>
+        <% } else { %>
+            <h1>No Products in Cart</h1>
+        <% } %>
+    </main>
+    <script src="/js/cart.js"></script>        
+<%- include('../includes/end.ejs') %>
