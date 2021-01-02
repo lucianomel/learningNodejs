@@ -1,0 +1,29 @@
+table{
+    display: inline;
+}
+h3{
+    display: inline;
+    margin-right: 1rem;
+}
+.cart__summary{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+td{
+    padding: 0.2rem;
+    border:1px solid lightgray;
+}
+th{
+    padding: 0.2rem;
+    border:1px solid grey;
+}
+.checkout__form{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.prodIdNoDisplay{
+    display: none;
+}

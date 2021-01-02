@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if(orders.lenght<=0){%>
+                <h1>Nothing there!</h1>
+                
+            <%}else{%>
+                <ul>
+                    <% orders.forEach(order=>{%>
+                        <li>
+                            <h1><%= order._id %> </h1>
+                        </li>
+                        <ul>
+                            <% order.products.forEach(i=>{%>
+                                <hr>
+                            <li>Title: <%= i.product.title %> </li>
+                            <li>Quantity: <%= i.qty %> </li>
+                            <li>Price:<%= i.product.price %> </li>    
+                            <li>Subtotal:<%= Math.round(i.product.price*i.qty*100)/100 %> </li>
+                            <hr>    
+                            <% }) %> 
+                            <li>Total Order Price:<%= order.totalPrice %> </li>
+                        </ul>
+                    <%}) %> 
+                </ul>        
+            <%} %> 
+        </main>
+        <%- include('../includes/end.ejs') %>
